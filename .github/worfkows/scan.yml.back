@@ -1,0 +1,20 @@
+name: Workflow Semgrep centralisé
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+  actions: read
+  id-token: write
+  security-events: write
+
+jobs:
+  call-semgrep-scan:
+    uses: ./.github/workflows/reusable-scan.yml
+    with:
+      working-directory: '.'
+      is-blocking: true
